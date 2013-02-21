@@ -137,7 +137,7 @@ public class RobotTemplate extends SimpleRobot {
 
     public void feed() {
         moveAimerUp(loaderSolenoid1, loaderSolenoid2);
-        while () {
+        while (!loadingSensor.get()) {
         }
         push();
         moveAimerDown(loaderSolenoid1, loaderSolenoid2);
@@ -147,7 +147,6 @@ public class RobotTemplate extends SimpleRobot {
 
     public void spit() {
         shooter.set(Relay.Value.kReverse);
-
         feed();
         shooter.set(Relay.Value.kOff);
 
@@ -165,12 +164,7 @@ public class RobotTemplate extends SimpleRobot {
 
     public void shoot() {
         shooter.set(Relay.Value.kForward);
-        moveAimerUp(loaderSolenoid1, loaderSolenoid2);
-        while (1 == 1 /*put io reading here*/) {
-        }
-        holdAimerStill(loaderSolenoid1, loaderSolenoid2);
-        loader.setAngle(99);
-        loader.setAngle(0);
+        feed();
         shooter.set(Relay.Value.kOff);
 
     }
